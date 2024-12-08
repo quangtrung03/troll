@@ -118,6 +118,7 @@
       top: 50%; /* Đặt nút ở vị trí ban đầu */
       left: 50%;
       transform: translate(-50%, -50%); /* Căn giữa nút */
+      transition: all 0.5s ease; /* Thêm hiệu ứng chuyển động mượt mà */
     }
 
     .fraud-button:hover {
@@ -174,11 +175,21 @@
   }
 
   function moveButton(button) {
-    const randomTop = Math.floor(Math.random() * 80) + "vh";
-    const randomLeft = Math.floor(Math.random() * 80) + "vw";
+    const randomTop = Math.floor(Math.random() * 80) + "vh";  // Vị trí ngẫu nhiên dọc
+    const randomLeft = Math.floor(Math.random() * 80) + "vw"; // Vị trí ngẫu nhiên ngang
     button.style.top = randomTop;
     button.style.left = randomLeft;
   }
+
+  // Đảm bảo nút sẽ di chuyển mỗi khi người dùng chạm hoặc di chuột
+  document.querySelector('.fraud-button').addEventListener('mouseover', function() {
+    moveButton(this);
+  });
+
+  document.querySelector('.fraud-button').addEventListener('touchmove', function(e) {
+    e.preventDefault(); // Ngừng mặc định hành động của thiết bị cảm ứng
+    moveButton(this);
+  });
 </script>
 
 </body>

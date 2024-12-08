@@ -12,18 +12,25 @@
     background-position: center;
     background-attachment: fixed;
     font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .centered {
-    width: 100%;
+    width: 90%;
+    max-width: 600px;
     text-align: center;
   }
 
   .centered h4 {
     color: #fff;
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: bold;
-    margin: 10vh auto;
+    margin-bottom: 30px;
   }
 
   input[type="checkbox"] {
@@ -31,16 +38,15 @@
   }
 
   label {
-    height: 40px;
-    padding: 10px 40px;
     display: inline-block;
-    cursor: pointer;
-    margin: 0 20px;
+    padding: 15px 40px;
+    margin: 10px 20px;
     border-radius: 5px;
     color: #fff;
     font-size: 1.5em;
+    cursor: pointer;
     text-transform: uppercase;
-    transition: all 0.25s ease-in-out;
+    transition: transform 0.25s ease-in-out;
   }
 
   label:hover {
@@ -55,11 +61,10 @@
     background-color: #12d890;
   }
 
-  /* Hiển thị phần trả lời */
   .answer--yes, .answer--no {
     position: fixed;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
     visibility: hidden;
@@ -84,19 +89,19 @@
     opacity: 1;
   }
 
-  .back-button {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
+  .back-button, .fraud-button {
+    padding: 15px 30px;
     font-size: 1.5em;
     color: #fff;
-    background: #d8124b;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-top: 20px;
+  }
+
+  .back-button {
+    background: #d8124b;
   }
 
   .back-button:hover {
@@ -105,20 +110,29 @@
   }
 
   .fraud-button {
-    position: absolute;
-    padding: 10px 20px;
-    font-size: 1.5em;
-    color: #fff;
     background: #ffa500;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    position: absolute;
   }
 
   .fraud-button:hover {
     background: #ff7f00;
     transform: scale(1.1);
+  }
+
+  @media screen and (max-width: 768px) {
+    .centered h4 {
+      font-size: 2em;
+    }
+
+    label {
+      font-size: 1.2em;
+      padding: 10px 20px;
+    }
+
+    .back-button, .fraud-button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+    }
   }
   </style>
 </head>
@@ -126,18 +140,17 @@
 
 <div class="centered">
   <h4>Quà ở đâu?</h4>
-  
-  <!-- Các checkbox cho câu trả lời -->
-  <input class="no" id="No" type="checkbox" name="answer"/>
-  <label class="no" for="No">Ở bên phải</label>
-  <input class="yes" id="Yes" type="checkbox" name="answer"/>
-  <label class="yes" for="Yes">Ở bên trái</label>
 
-  <!-- Div hiển thị khi chọn đáp án -->
+  <input class="no" id="No" type="checkbox" name="answer"/>
+  <label class="no" for="No">đây nè</label>
+
+  <input class="yes" id="Yes" type="checkbox" name="answer"/>
+  <label class="yes" for="Yes">bên kia sai</label>
+
   <div class="answer--yes">
     <button class="back-button" onclick="goBack(event)">Trở về</button>
   </div>
-  
+
   <div class="answer--no">
     <button class="back-button" onclick="goBack(event)">Trở về</button>
     <div class="fraud-buttons">
@@ -146,7 +159,6 @@
   </div>
 </div>
 
-<!-- JavaScript -->
 <script type="text/javascript">
 function goBack(event) {
   event.stopPropagation();
@@ -156,9 +168,8 @@ function goBack(event) {
 }
 
 function moveButton(button) {
-  let randomTop = Math.floor(Math.random() * 80) + "vh";
-  let randomLeft = Math.floor(Math.random() * 80) + "vw";
-  button.style.position = "absolute";
+  const randomTop = Math.floor(Math.random() * 80) + "vh";
+  const randomLeft = Math.floor(Math.random() * 80) + "vw";
   button.style.top = randomTop;
   button.style.left = randomLeft;
 }
